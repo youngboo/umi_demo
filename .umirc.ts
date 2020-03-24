@@ -8,14 +8,14 @@ export default defineConfig({
   //   menu: { name: 'aa' },
   //   layout: 'topmenu',
   // },
-  routes: [
-    {
-      path: '/',
-      component: '@/pages/index',
-      name: '首页',
-    },
-    { path: '/prepare', component: '@/pages/prepare', name: '备课' },
-  ],
+  // routes: [
+  //   {
+  //     path: '/',
+  //     component: '@/pages/index',
+  //     name: '首页',
+  //   },
+  //   { path: '/prepare', component: '@/pages/prepare', name: '备课' },
+  // ],
   qiankun: {
     master: {
       defer: true,
