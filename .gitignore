@@ -6,6 +6,8 @@
 /yarn-error.log
 /yarn.lock
 /package-lock.json
+/subapp/react16/node_modules
+/subapp/angular9/node_modules
 
 # production
 /dist
@@ -18,3 +20,7 @@
 /src/.umi-production
 /src/.umi-test
 /.env.local
+
+# other
+/subapp/react16/public
+/subapp/angular9/e2e

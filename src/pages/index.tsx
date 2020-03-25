@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.less';
 
 export default () => {
@@ -7,4 +7,4 @@ export default () => {
       <h1 className={styles.title}>Page index</h1>
     </div>
   );
-}
+};

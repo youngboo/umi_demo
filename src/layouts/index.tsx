@@ -3,7 +3,14 @@ import { connect } from 'umi';
 import React from 'react';
 import { Link } from 'umi';
 import style from './style.less';
-import app from '@/mock/app';
+import {
+  SettingDrawer,
+  MenuDataItem,
+  PageLoading,
+} from '@ant-design/pro-layout';
+import ProLayout from '@ant-design/pro-layout';
+import MyIcon from '@/components/MyIcon';
+import SubMenu from 'antd/lib/menu/SubMenu';
 
 const { Header, Content, Footer } = Layout;
 
@@ -35,45 +42,85 @@ class Layouts extends React.PureComponent<any, any> {
     console.log(base, 'base');
     const { name } = base;
     const selectKey = '/' + location.pathname.split('/')[1];
-    const apps = [
-      {
-        name: 'app1',
-        entry: 'http://localhost:8001/app1',
-        base: '/app1',
-        mountElementId: 'root-subapp-container',
-      },
-      {
-        name: 'app2',
-        entry: 'http://localhost:8002/app2',
-        base: '/app2',
-        mountElementId: 'root-subapp-container',
-      },
+    let { apps } = base;
+    if (!apps) {
+      apps = [];
+    }
+    apps = apps.concat([
       {
         name: 'prepare',
         base: '/prepare',
-        mountElementId: 'root-subapp-container',
       },
-      {
-        name: 'react15',
-        entry: 'http://localhost:7102',
-        base: '/react15',
-        mountElementId: 'root-subapp-container',
-      },
-      {
-        name: 'vue',
-        entry: 'http://localhost:7101',
-        base: '/vue',
-        mountElementId: 'root-subapp-container',
-      },
-      {
-        name: 'school-website',
-        entry: 'http://localhost:8081',
-        base: '/school',
-        mountElementId: 'root-subapp-container',
-      },
-    ];
+    ]);
+    // const Menuapps = [
+    //   {
+    //     name: 'app1',
+    //     entry: 'http://localhost:8001/app1',
+    //     base: '/app1',
+    //     mountElementId: 'root-subapp-container',
+    //   },
+    //   {
+    //     name: 'app2',
+    //     entry: 'http://localhost:8002/app2',
+    //     base: '/app2',
+    //     mountElementId: 'root-subapp-container',
+    //   },
+    //   {
+    //     name: 'prepare',
+    //     base: '/prepare',
+    //     mountElementId: 'root-subapp-container',
+    //   },
+    //   {
+    //     name: 'react15',
+    //     entry: 'http://localhost:7102',
+    //     base: '/react15',
+    //     mountElementId: 'root-subapp-container',
+    //   },
+    //   {
+    //     name: 'vue',
+    //     entry: 'http://localhost:7101',
+    //     base: '/vue',
+    //     mountElementId: 'root-subapp-container',
+    //   },
+    //   {
+    //     name: 'school-website',
+    //     entry: 'http://localhost:8081',
+    //     base: '/school',
+    //     mountElementId: 'root-subapp-container',
+    //   },
+    // ];
     return (
-      <Layout className={style.layout}>
+      // <ProLayout
+      //   title="后台管理"
+      //   layout="topmenu"
+      //   logo={() => <MyIcon type="icon-zykj" style={{ fontSize: 20 }} />}
+      //   fixSiderbar={false}
+      //   menuDataRender={(menuData: MenuDataItem[]) => {
+      //     console.log(menuData, 'menuData');
+      //     return apps
+      //       ? apps.map((m: any) => {
+      //           return { name: m.name, path: m.base, key: m.name };
+      //         })
+      //       : [];
+      //   }}
+      //   footerRender={() => (
+      //     <Footer className={style.footer}>
+      //       Ant Design ©2019 Created by Ant UED
+      //     </Footer>
+      //   )}
+      // >
+      //   <Content className={style.content}>
+      //     {renderBreadCrumb(location.pathname)}
+      //     {// 加载master pages，此处判断较为简单，实际需排除所有子应用base打头的路径
+      //     selectKey === '/' || selectKey === '/prepare' ? children : null}
+      //     {apps && apps.length ? <div id="root-subapp-container" /> : null}
+      //     <SettingDrawer
+      //     onSettingChange={() => {}}
+      //     />
+      //   </Content>
+      // </ProLayout>
+
+      <Layout>
         <Header>
           <div className={style.logo}>{name}</div>
           <Menu
@@ -89,16 +136,15 @@ class Layouts extends React.PureComponent<any, any> {
             {apps &&
               apps.length > 0 &&
               apps.map((app: any, index: number) => {
-                if (index === 2) {
-                  return (
-                    <Menu.Item key={app.base}>
-                      <Link to="/prepare">{app.name}</Link>
+                return app.children ? (
+                  app.children.map((c: any) => (
+                    <Menu.Item key={c.base}>
+                      <Link to={c.base}>{c.name}</Link>
                     </Menu.Item>
-                  );
-                }
-                return (
+                  ))
+                ) : (
                   <Menu.Item key={app.base}>
-                    <Link to={app.base}>{app.name}</Link>
+                    <Link to={app.base}>{app.name}</Link>{' '}
                   </Menu.Item>
                 );
               })}
@@ -109,6 +155,7 @@ class Layouts extends React.PureComponent<any, any> {
           {// 加载master pages，此处判断较为简单，实际需排除所有子应用base打头的路径
           selectKey === '/' || selectKey === '/prepare' ? children : null}
           {apps && apps.length ? <div id="root-subapp-container" /> : null}
+          <SettingDrawer />
         </Content>
         <Footer className={style.footer}>
           Ant Design ©2019 Created by Ant UED
@@ -117,8 +164,4 @@ class Layouts extends React.PureComponent<any, any> {
     );
   }
 }
-export default connect<{}, {}, any>((base: any) => {
-  return {
-    base,
-  };
-})(Layouts);
+export default connect<{}, {}, any>((base: any) => base)(Layouts);

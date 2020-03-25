@@ -1,8 +1,9 @@
 /* eslint-disable prefer-const */
 import * as React from 'react';
 
-import { Divider, message, Tabs } from 'antd';
-import { ColumnProps } from 'antd/lib/table';
+import { Divider, message, Tabs, List, Typography } from 'antd';
+import { times } from 'lodash-es';
+import { ColumnProps } from 'antd/lib/table/Column';
 
 const co = require('co');
 const uuidv1 = require('uuid/v1');
@@ -178,6 +179,16 @@ class PrepareLessons extends React.Component<any, any> {
         dataIndex: 'name',
       },
     ];
+    const data = [
+      'Racing car sprays burning fuel into crowd.',
+      'Japanese princess to wed commoner.',
+      'Australian walks 100km after outback crash.',
+      'Man charged over missing wedding girl.',
+      'Los Angeles battles huge wildfires.',
+    ];
+    times(100, () => {
+      data.push('Los Angeles battles huge wildfires.');
+    });
     return (
       <div
         className="app-prepare-lessons clearfix"
@@ -186,6 +197,17 @@ class PrepareLessons extends React.Component<any, any> {
         <h1>备课</h1>
 
         <Divider />
+        <List
+          header={<div>Header</div>}
+          footer={<div>Footer</div>}
+          bordered
+          dataSource={data}
+          renderItem={(item: any) => (
+            <List.Item>
+              <Typography.Text mark>[ITEM]</Typography.Text> {item}
+            </List.Item>
+          )}
+        />
       </div>
     );
   }
