@@ -19,7 +19,16 @@ export default {
       base: '/react16',
       mountElementId: 'root-subapp-container',
     },
+    {
+      name: 'prepare',
+      base: '/prepare',
+    },
+    {
+      name: 'about',
+      base: '/about',
+    },
   ],
+
   // [
   //   {
   //     name: 'app1',
@@ -61,4 +70,10 @@ export default {
   //     mountElementId: 'root-subapp-container',
   //   },
   // ],
+
+  'GET /api/config': {
+    theme: 'dark',
+    userId: 2,
+    role: 'admin',
+  },
 };

@@ -28,7 +28,6 @@ export default defineConfig({
   //   { path: '/vue', exact: true, component: 'subAppContainer', name: 'vue' },
   //   { path: '/app2', exact: true, component: 'subAppContainer', name: 'app2' },
   // ],
-
   mock: {},
   qiankun: {
     master: {

@@ -14,7 +14,7 @@ Vue.use(ElementUI);
 let router = null;
 let instance = null;
 
-function render() {
+function render(props) {
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? '/vue' : '/',
     mode: 'history',
@@ -24,6 +24,7 @@ function render() {
   instance = new Vue({
     router,
     store,
+    props,
     render: h => h(App),
   }).$mount('#app');
 }
@@ -38,7 +39,7 @@ export async function bootstrap() {
 
 export async function mount(props) {
   console.log('[vue] props from main framework', props);
-  render();
+  render(props);
 }
 
 export async function unmount() {

@@ -24,6 +24,7 @@
     "@ant-design/pro-layout": "^5.0.8",
     "@umijs/plugin-qiankun": "^2.0.6",
     "@umijs/preset-react": "1.x",
+    "@umijs/preset-ui": "^2.1.3",
     "@umijs/test": "^3.0.13",
     "antd": "^4.0.4",
     "lint-staged": "^10.0.7",
@@ -37,6 +38,6 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.3",
-    "@umijs/preset-ui": "^2.0.10"
+    "less": "^3.11.1"
   }
 }

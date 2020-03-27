@@ -43,15 +43,15 @@ class Layouts extends React.PureComponent<any, any> {
     const { name } = base;
     const selectKey = '/' + location.pathname.split('/')[1];
     let { apps } = base;
-    if (!apps) {
-      apps = [];
-    }
-    apps = apps.concat([
-      {
-        name: 'prepare',
-        base: '/prepare',
-      },
-    ]);
+    // if (!apps) {
+    //   apps = [];
+    // }
+    // apps = apps.concat([
+    //   {
+    //     name: 'prepare',
+    //     base: '/prepare',
+    //   },
+    // ]);
     // const Menuapps = [
     //   {
     //     name: 'app1',
@@ -121,14 +121,15 @@ class Layouts extends React.PureComponent<any, any> {
       // </ProLayout>
 
       <Layout>
-        <Header>
-          <div className={style.logo}>{name}</div>
+        <Header
+          className="header"
+          style={{ width: '100vw', background: '#ffffff' }}
+        >
           <Menu
-            theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['home']}
             selectedKeys={[selectKey]}
-            style={{ lineHeight: '64px' }}
+            style={{ lineHeight: '64px', width: '100vw' }}
           >
             <Menu.Item key="/">
               <Link to="/">Home</Link>
@@ -144,7 +145,7 @@ class Layouts extends React.PureComponent<any, any> {
                   ))
                 ) : (
                   <Menu.Item key={app.base}>
-                    <Link to={app.base}>{app.name}</Link>{' '}
+                    <Link to={app.base}>{app.name}</Link>
                   </Menu.Item>
                 );
               })}
@@ -153,9 +154,17 @@ class Layouts extends React.PureComponent<any, any> {
         <Content className={style.content}>
           {renderBreadCrumb(location.pathname)}
           {// 加载master pages，此处判断较为简单，实际需排除所有子应用base打头的路径
-          selectKey === '/' || selectKey === '/prepare' ? children : null}
+          selectKey === '/' ||
+          selectKey === '/prepare' ||
+          selectKey === '/about'
+            ? children
+            : null}
           {apps && apps.length ? <div id="root-subapp-container" /> : null}
-          <SettingDrawer />
+          <SettingDrawer
+            onSettingChange={(e: any) => {
+              console.log(e, 'change e');
+            }}
+          />
         </Content>
         <Footer className={style.footer}>
           Ant Design ©2019 Created by Ant UED

@@ -17,8 +17,18 @@ export const qiankun = request('/apps').then((apps: any) => ({
   lifeCycles: {
     // see https://github.com/umijs/qiankun#registermicroapps
     afterMount: (props: any) => {
-      console.log(props, 'props');
+      // console.log(props, 'props');
     },
   },
   // ...even more options qiankun start() supported, see https://github.com/umijs/qiankun#start
 }));
+export async function getInitialState() {
+  const data = await request('/config');
+  return data;
+}
+// export const locale = {
+//   setLocale({ lang, realReload, updater }) {
+//     history.push(`/?locale=${lang}`);
+//     updater();
+//   }
+// }

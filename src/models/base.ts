@@ -23,7 +23,7 @@ export default {
       yield sleep(1000);
 
       const apps = yield query();
-      console.log(apps);
+      // console.log(apps, 'apps');
       yield put({
         type: 'getAppsSuccess',
         payload: {
