@@ -6,24 +6,58 @@ export default defineConfig({
   //   // compact: true,
   // },
   // plugins: ['umi-plugin-dva'],
-  // layout: {
-  //   name: 'Ant Design',
-  //   locale: true,
-  //   layout: 'topmenu',
-  //   fixedHeader: 'false',
-  //   theme: 'pro',
-  // },
+  layout: {
+    name: 'umi demo',
+    locale: true,
+    layout: 'topmenu',
+    fixedHeader: 'true',
+    theme: 'pro',
+    contentWidth: 'fluid',
+  },
   antd: {},
-  // routes: [
-  //   {
-  //     path: '/',
-  //     component: '@/pages/index',
-  //     name: '首页',
-  //   },
-  //   { path: '/prepare', component: '@/pages/prepare', name: '备课' },
-  //   { path: '/vue', exact: true, component: 'subAppContainer', name: 'vue' },
-  //   { path: '/app2', exact: true, component: 'subAppContainer', name: 'app2' },
-  // ],
+  routes: [
+    {
+      path: '/login',
+      component: '@/pages/login',
+      name: '登录',
+      layout: {
+        hideNav: true,
+      },
+    },
+    {
+      path: '/prepare',
+      component: '@/pages/prepare',
+      name: '备课',
+      access: 'canReadCoo',
+    },
+    // {
+    //   path: '/vue',
+    //   exact: true,
+    //   component: '@/pages/subAppContainer',
+    //   name: 'vue',
+    // },
+    {
+      path: '/',
+      component: '@/layouts/index',
+      name: '首页',
+      routes: [
+        { path: '/home', component: '@/pages/index' },
+        { path: '/about', component: '@/pages/about' },
+        // { path: '/prepare', component: '@/pages/prepare' },
+        {
+          path: '/vue',
+          exact: true,
+          component: '@/pages/subAppContainer',
+        },
+      ],
+    },
+    // {
+    //   path: '/vue',
+    //   exact: true,
+    //   component: 'subAppContainer',
+    //   name: 'vue',
+    // },
+  ],
   // routes: [
   //   { path: '/vue', exact: true, component: 'subAppContainer', name: 'vue' },
   //   { path: '/app2', exact: true, component: 'subAppContainer', name: 'app2' },

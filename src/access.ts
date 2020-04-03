@@ -1,6 +1,5 @@
 export default function(initialState: any) {
   const { userId, role } = initialState;
-  console.log(userId, 'data');
 
   return {
     canReadFoo: userId === 1,

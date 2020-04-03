@@ -1,4 +1,6 @@
 import request from './services/request';
+import * as React from 'react';
+import { Avatar } from 'antd';
 
 // 从接口中获取子应用配置，export 出的 qiankun 变量是一个 promise
 export const qiankun = request('/apps').then((apps: any) => ({
@@ -8,6 +10,7 @@ export const qiankun = request('/apps').then((apps: any) => ({
       ...a,
       props: {
         theme: 'dark',
+        // props: { appEntryName: 'abp-zero-template' },
         ...apps,
       },
     };
@@ -32,3 +35,8 @@ export async function getInitialState() {
 //     updater();
 //   }
 // }
+
+export const layout = {
+  logout: () => {}, // do something
+  // rightRender: (initInfo: any) => React.createElement(<Avatar> {initInfo.userName}</Avatar>), // return string || ReactNode;
+};

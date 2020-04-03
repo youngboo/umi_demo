@@ -39,19 +39,18 @@ class Layouts extends React.PureComponent<any, any> {
 
   render() {
     const { location, children, base } = this.props;
-    console.log(base, 'base');
     const { name } = base;
     const selectKey = '/' + location.pathname.split('/')[1];
     let { apps } = base;
-    // if (!apps) {
-    //   apps = [];
-    // }
-    // apps = apps.concat([
-    //   {
-    //     name: 'prepare',
-    //     base: '/prepare',
-    //   },
-    // ]);
+    if (!apps) {
+      apps = [];
+    }
+    apps = apps.concat([
+      {
+        name: 'about',
+        base: '/about',
+      },
+    ]);
     // const Menuapps = [
     //   {
     //     name: 'app1',
@@ -155,7 +154,7 @@ class Layouts extends React.PureComponent<any, any> {
           {renderBreadCrumb(location.pathname)}
           {// 加载master pages，此处判断较为简单，实际需排除所有子应用base打头的路径
           selectKey === '/' ||
-          selectKey === '/prepare' ||
+          // selectKey === '/prepare' ||
           selectKey === '/about'
             ? children
             : null}
